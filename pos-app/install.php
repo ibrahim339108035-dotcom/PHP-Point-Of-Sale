@@ -10,7 +10,8 @@ foreach ($currencyOptions as $code => $label) $currencyMarkup .= '<option value=
 $currencyMarkup .= '</select>';
 ob_start(function ($html) use ($currencyMarkup) {
     $html = str_replace('Roznamcha POS', 'PaK Sale App', $html);
-    return str_replace('<label>Currency<input name="currency" value="Rs" maxlength="8"></label>', '<label>Currency' . $currencyMarkup . '</label><label>Receipt printer<select name="printer"><option value="browser">Normal printer / A4</option><option value="thermal58">Thermal printer 58mm</option><option value="thermal80">Thermal printer 80mm</option></select></label>', $html);
+    $html = str_replace('<label>Currency<input name="currency" value="Rs" maxlength="8"></label>', '<label>Currency' . $currencyMarkup . '</label><label>Receipt printer<select name="printer"><option value="browser">Normal printer / A4</option><option value="thermal58">Thermal printer 58mm</option><option value="thermal80">Thermal printer 80mm</option></select></label>', $html);
+    return str_replace('</main>', '<p class="credit">Developed by Jibran Khan Malap</p></main>', $html);
 });
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$installed) {

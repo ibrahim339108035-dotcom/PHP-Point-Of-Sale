@@ -11,6 +11,8 @@ username: admin
 password:pointofsale
 8. Enjoy
 
+Credit: PaK Sale App was developed by Jibran Khan Malap.
+
 New standalone POS preview
 --------------------------
 The new multi-business POS interface is available in the `pos-app` folder.
@@ -44,6 +46,26 @@ Sales and cash movements
 Completed payments `Sale history` mein browser ke local storage mein save hoti
 hain. Cash drawer se custom `Cash in` aur `Cash out` entries bhi add ki ja
 sakti hain; cash out current drawer balance se zyada nahi ho sakta.
+
+Product management
+------------------
+Sale counter par `Add product` se product, category, price, stock aur unit add
+kar sakte hain. Har product card mein `Edit` se price/tax-related sale settings
+update kar sakte hain aur `Delete` se product remove kar sakte hain. Tax rate
+receipt settings mein change hota hai.
+
+Payment and sale lists
+----------------------
+Settings mein custom payment methods add/remove kar sakte hain. Sale ko
+`Paid & receipt` ya `Save unpaid` ke taur par save kiya ja sakta hai. Sale
+history mein All, Paid only aur Unpaid only list filter karke `Print list` se
+print ki ja sakti hai.
+
+Item barcodes
+-------------
+Products ko auto barcode milta hai. Product card ke `Barcode` action se label
+print kar sakte hain, aur search box mein barcode number se item dhoond sakte
+hain. Product edit form se barcode manually change bhi kiya ja sakta hai.
 
 Deployment troubleshooting
 ---------------------------
