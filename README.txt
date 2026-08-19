@@ -53,6 +53,10 @@ Sale counter par `Add product` se product, category, price, stock aur unit add
 kar sakte hain. Har product card mein `Edit` se price/tax-related sale settings
 update kar sakte hain aur `Delete` se product remove kar sakte hain. Tax rate
 receipt settings mein change hota hai.
+Fresh install empty product list se start hota hai. Aap apni marzi ke products
+add karein; products server ke `pos-app/storage/products.json` mein save hote
+hain, is liye refresh ya doosre browser session ke baad bhi catalog available
+rahega.
 
 Payment and sale lists
 ----------------------

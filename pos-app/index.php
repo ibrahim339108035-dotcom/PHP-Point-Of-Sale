@@ -4,16 +4,10 @@ $assetPrefix = defined('POS_ASSET_PREFIX') ? POS_ASSET_PREFIX : '';
 $configFile = __DIR__ . '/storage/config.json';
 $installedSettings = is_file($configFile) ? json_decode(file_get_contents($configFile), true) : [];
 $installedSettings = is_array($installedSettings) ? $installedSettings : [];
-$products = [
-    ['id' => 1, 'name' => 'Paracetamol 500mg', 'category' => 'Pharmacy', 'price' => 120, 'stock' => 48, 'unit' => 'box'],
-    ['id' => 2, 'name' => 'Fresh Milk 1L', 'category' => 'Grocery', 'price' => 185, 'stock' => 24, 'unit' => 'pack'],
-    ['id' => 3, 'name' => 'Classic Burger', 'category' => 'Restaurant', 'price' => 650, 'stock' => 18, 'unit' => 'item'],
-    ['id' => 4, 'name' => 'Black T-Shirt', 'category' => 'Retail', 'price' => 1450, 'stock' => 12, 'unit' => 'item'],
-    ['id' => 5, 'name' => 'Vitamin C 1000mg', 'category' => 'Pharmacy', 'price' => 890, 'stock' => 31, 'unit' => 'bottle'],
-    ['id' => 6, 'name' => 'Mineral Water 1.5L', 'category' => 'Grocery', 'price' => 90, 'stock' => 66, 'unit' => 'bottle'],
-    ['id' => 7, 'name' => 'Chicken Biryani', 'category' => 'Restaurant', 'price' => 480, 'stock' => 25, 'unit' => 'plate'],
-    ['id' => 8, 'name' => 'Denim Jeans', 'category' => 'Retail', 'price' => 3200, 'stock' => 9, 'unit' => 'item'],
-];
+$defaultProducts = [];
+$productsFile = __DIR__ . '/storage/products.json';
+$products = is_file($productsFile) ? json_decode(file_get_contents($productsFile), true) : $defaultProducts;
+$products = is_array($products) && $products ? $products : $defaultProducts;
 $categories = ['Sab', 'Pharmacy', 'Grocery', 'Restaurant', 'Retail'];
 $currency = $installedSettings['currency'] ?? 'Rs';
 $currencySymbol = $currency === 'PKR' ? 'Rs' : $currency;
@@ -73,6 +67,6 @@ $companyLogo = !empty($installedSettings['logo']) ? $assetPrefix . $installedSet
 <div class="modal-backdrop" id="scannerModal"><div class="modal scanner-modal"><button type="button" class="modal-close" data-close="scannerModal">×</button><p class="eyebrow">BARCODE SCANNER</p><h2>Item scan karein</h2><video id="scannerVideo" autoplay muted playsinline></video><label>USB scanner code<input id="scannerInput" autocomplete="off" placeholder="Scanner se barcode scan karein"></label><p class="scanner-note" id="scannerNote">Camera start ho raha hai...</p><button type="button" class="save-button" id="closeScanner">Close scanner</button></div></div>
 <div class="modal-backdrop" id="productModal"><form class="modal" id="productForm"><button type="button" class="modal-close" data-close="productModal">×</button><p class="eyebrow">PRODUCT CATALOG</p><h2 id="productModalTitle">Add product</h2><input type="hidden" id="productId"><label>Product icon<select id="productIcon"><option value="💊">💊 Medicine</option><option value="🛒">🛒 Grocery</option><option value="🍔">🍔 Burger</option><option value="🍛">🍛 Food</option><option value="👕">👕 Clothing</option><option value="📦">📦 General item</option><option value="🥤">🥤 Drink</option><option value="✏️">✏️ Custom/other</option></select></label><label>Product name<input id="productName" required placeholder="Product name"></label><label>Category<select id="productCategory"><option>Pharmacy</option><option>Grocery</option><option>Restaurant</option><option>Retail</option></select></label><label>Barcode<input id="productBarcode" placeholder="Auto generate hoga"></label><label>Price<input id="productPrice" type="number" min="0" step="0.01" required placeholder="0"></label><label>Stock<input id="productStock" type="number" min="0" step="1" required placeholder="0"></label><label>Unit<input id="productUnit" required value="item"></label><button class="save-button" type="submit">Save product</button></form></div>
 <div class="toast" id="toast"></div>
-<script>window.POS_PRODUCTS = <?= json_encode($products) ?>; window.POS_INSTALL_SETTINGS = <?= json_encode(['company' => $companyName, 'tax' => $taxRate, 'currency' => $currency === 'Rs' ? 'PKR' : $currency, 'printer' => $installedSettings['printer'] ?? 'browser', 'logo' => $companyLogo]) ?>;</script><script src="<?= $assetPrefix ?>app.js"></script>
+<script>window.POS_PRODUCTS = <?= json_encode($products, JSON_UNESCAPED_UNICODE) ?>; window.POS_API_URL = <?= json_encode($assetPrefix . 'api/products.php') ?>; window.POS_INSTALL_SETTINGS = <?= json_encode(['company' => $companyName, 'tax' => $taxRate, 'currency' => $currency === 'Rs' ? 'PKR' : $currency, 'printer' => $installedSettings['printer'] ?? 'browser', 'logo' => $companyLogo]) ?>;</script><script src="<?= $assetPrefix ?>app.js"></script>
 </body>
 </html>
