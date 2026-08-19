@@ -1,4 +1,13 @@
 <?php
+// Serve the new POS from the deployment root.
+define('POS_ASSET_PREFIX', 'pos-app/');
+if (!is_file(__DIR__ . '/pos-app/storage/config.json')) {
+	require __DIR__ . '/pos-app/install.php';
+	exit;
+}
+require __DIR__ . '/pos-app/index.php';
+exit;
+
 /*
 |---------------------------------------------------------------
 | PHP ERROR REPORTING LEVEL

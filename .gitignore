@@ -1,1 +1,3 @@
 application/config/database.php
+pos-app/storage/*.json
+pos-app/storage/logo.*
